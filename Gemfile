@@ -30,8 +30,7 @@ gem 'puma'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
-# gem 'money-rails'
-gem 'money-rails', path: "./money-rails/"
+gem 'money-rails'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'stripe'

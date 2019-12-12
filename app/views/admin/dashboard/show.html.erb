@@ -4,25 +4,25 @@
     <h1>Admin &raquo; Dashboard information</h1>
   </header>
 
-    <div class="panel panel-default products">
+  <div class="panel panel-default products">
 
-    <table class="table table-bordered">
+  <table class="table table-bordered">
 
-      <tbody>
-        <tr>
-        <td>Products quantity</td>
+    <tbody>
+      <tr>
+      <td>Products quantity</td>
+      <td>
+          <%= link_to @product_count, admin_products_path %>
+      </td>
+      </tr>
+      <tr>
+      <td>Category quantaty</td>
         <td>
-           <%= link_to @product_count, admin_products_path %>
+          <%= link_to @category_count.count, admin_products_path %>
         </td>
-        </tr>
-        <tr>
-        <td>Category quantaty</td>
-          <td>
-            <%= link_to @category_count.count, admin_products_path %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      </tr>
+    </tbody>
+  </table>
 
   </div>
 </section>

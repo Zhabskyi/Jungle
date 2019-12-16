@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :about, only: [:index]
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
-  resources :users, only: [:index, :new, :create]
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [ :new, :create]
+  resources :sessions, only: [:index, :new, :create, :destroy]
 
   resource :cart, only: [:show] do
     post   :add_item

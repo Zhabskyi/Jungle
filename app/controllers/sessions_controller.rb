@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
 
+  def index
+  end
+
   def create
     user = User.find_by_email(params[:email])
     # If the user exists AND the password entered is correct.
@@ -10,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
     # If user's login doesn't work, send them back to the login form.
-      redirect_to new_session_path
+      redirect_to sessions_path
     end
   end
 

@@ -133,7 +133,7 @@ RSpec.describe User, type: :model do
       @user = User.new(
         first_name: "John", 
         last_name: "Doe", 
-        email: "doe@gmail.com", 
+        email: "doe@gmaIL.COM", 
         password: "12345", 
         password_confirmation: "12345")
       @user.save!

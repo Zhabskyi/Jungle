@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false }
 
-   before_validation :strip_whitespace
+   before_validation :strip_whitespace, :downcase
 
   def authenticate_with_credentials (email, password)
     new_email = email.downcase
@@ -23,8 +23,13 @@ class User < ActiveRecord::Base
   end
 
 
+  private
   def strip_whitespace
     self.email = self.email.strip unless self.email.nil?
+  end
+
+  def downcase
+    self.email = self.email.downcase unless self.email.nil?
   end
 
 end

@@ -61,7 +61,7 @@ RSpec.describe User, type: :model do
         last_name: "Doe", 
         email: "doe@gmail.com", 
         password_digest: "123456", 
-        password_confirmation: "654321")
+        password_confirmation: "123456")
       user1 =  User.create(
         first_name: "Marry", 
         last_name: "Kvint", 
@@ -76,7 +76,7 @@ RSpec.describe User, type: :model do
         first_name: "John", 
         last_name: "Doe", 
         email: "doe@gmail.com", 
-        password_digest: "123456", 
+        password: "123456", 
         password_confirmation: "654321")
       expect(@user.password_digest).not_to eq(@user.password_confirmation)
     end
@@ -96,9 +96,49 @@ RSpec.describe User, type: :model do
         first_name: "John", 
         last_name: "Doe", 
         email: "doe@gmail.com", 
-        password_digest: "12345", 
+        password: "12345", 
         password_confirmation: "12345")
         expect(@user).to be_valid
+    end
+
+  end
+
+  describe '.authenticate_with_credentials' do
+    it "should still be authenticated successfully" do
+      @user = User.new(
+        first_name: "John", 
+        last_name: "Doe", 
+        email: "doe@gmail.com", 
+        password: "12345", 
+        password_confirmation: "12345")
+      @user.save!
+        login = @user.authenticate_with_credentials("doe@gmail.com", @user.password)
+        expect(login).to be_truthy
+    end
+
+
+    it "should still be authenticated successfully if a visitor types in a few spaces before and/or after their email address" do
+      @user = User.new(
+        first_name: "John", 
+        last_name: "Doe", 
+        email: "    doe@gmail.com   ", 
+        password: "12345", 
+        password_confirmation: "12345")
+      @user.save!
+        login = @user.authenticate_with_credentials("doe@gmail.com", @user.password)
+        expect(login).to be_truthy
+    end
+
+    it "should still be authenticated successfully if a visitor types in the wrong case for their email" do
+      @user = User.new(
+        first_name: "John", 
+        last_name: "Doe", 
+        email: "doe@gmail.com", 
+        password: "12345", 
+        password_confirmation: "12345")
+      @user.save!
+        login = @user.authenticate_with_credentials("DoE@GMaiL.com", @user.password)
+        expect(login).to be_truthy
     end
 
   end

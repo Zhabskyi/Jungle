@@ -81,7 +81,7 @@ RSpec.describe User, type: :model do
       expect(@user.password_digest).not_to eq(@user.password_confirmation)
     end
 
-    it "is password min length is 5" do
+    it "is not when password min length is less then 5" do
       @user = User.new(
         first_name: "John", 
         last_name: "Doe", 
@@ -89,6 +89,16 @@ RSpec.describe User, type: :model do
         password_digest: "123", 
         password_confirmation: "123")
         expect(@user).to_not be_valid
+    end
+
+    it "is password min length is 5" do
+      @user = User.new(
+        first_name: "John", 
+        last_name: "Doe", 
+        email: "doe@gmail.com", 
+        password_digest: "12345", 
+        password_confirmation: "12345")
+        expect(@user).to be_valid
     end
 
   end
